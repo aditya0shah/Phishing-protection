@@ -1,2 +1,2 @@
-# Anomaly-IDPS
-Anomaly Based detection for EmP HackFest
+# Phishing Detection
+Phishing email detection for EmP
