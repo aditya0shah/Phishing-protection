@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title id="headerTitle"></title>
+        <!-- Scripts -->
+        <script src="var.js" type="text/javascript"></script>
+        <script src="gmailVerify.js" type="text/javascript"></script>
+
+        <!-- Imports -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+        <script src="https://apis.google.com/js/api.js"></script>
+
+        <!-- Css Styles -->
+        <link rel="stylesheet" href="style.css" type="text/css"/>
+    </head>
+    <body>
+        <!-- Title & Icon -->
+        <h1 id="pageTitle"></h1>
+
+        <!-- Main Page -->
+        <p id="result"></p>
+
+        <script>
+            document.getElementById('headerTitle').innerHTML = title;
+            document.getElementById('pageTitle').innerHTML = title;
+        </script>
+        <script>
+            r = document.getElementById('result');
+            if(result) {
+                r.innerHTML = "is phising"
+            } else {
+                r.innerHTML = "is not phising"
+            }
+        </script>
+    </body>
+</html>

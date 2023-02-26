@@ -1,0 +1,25 @@
+{
+    "name": "Phishing Detector",
+    "version": "1.0.0",
+    "description": "Detect Phishing Emails & Websites",
+    "manifest_version": 3,
+    "author": "Arvick Chandnani, Aditya Shah",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Phishing Dector"
+    },
+    "permissions": ["activeTab", "scripting", "tabs"],
+    "host_permissions": [
+        "https://mail.google.com/",
+        "https://www.googleapis.com/auth/gmail.readonly"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://mail.google.com/*"],
+            "js": ["gmailVerify.js"]
+        }
+    ]
+}
