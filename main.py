@@ -1,19 +1,41 @@
 from flask import Flask, render_template, jsonify, request
-import json 
+import json
+import torch
+from transformers import BertTokenizer, BertForSequenceClassification
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="/.", static_folder="/.")
 
-@app.route('/login')
-@app.route('/')
-def login():
-    return render_template('login.html')
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
+
+labels = ['Not phishing', 'Phishing']
+
+
+def classify_text(text):
+    inputs = tokenizer(text, return_tensors='pt')
+
+    outputs = model(**inputs)
+
+    predicted_class = torch.argmax(outputs.logits, dim=1).item()
+
+    return labels[predicted_class]
+    
+
+@app.route('/classify', methods=['POST'])
+def classify():
+    text = request.json['text']
+
+    prediction = classify_text(text)
+
+    return jsonify({'prediction': prediction})
+
+
+@app.route('/', methods=['POST'])
+def home():
+    return render_template('index.html')
 
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000, debug=True)
-
+    app.run(debug=True)
