@@ -1,25 +1,23 @@
 {
-    "name": "Phishing Detector",
+    "name": "Phish Finder",
     "version": "1.0.0",
-    "description": "Detect Phishing Emails & Websites",
+    "description": "Detect Phishing Emails",
     "manifest_version": 3,
     "author": "Arvick Chandnani, Aditya Shah",
     "action": {
         "default_popup": "index.html",
-        "default_title": "Phishing Dector"
+        "default_title": "Phish Finder"
     },
-    "permissions": ["activeTab", "scripting", "tabs"],
+    "permissions": ["activeTab", "scripting", "tabs", "contextMenus", "webRequest", "webNavigation"],
     "host_permissions": [
         "https://mail.google.com/",
-        "https://www.googleapis.com/auth/gmail.readonly"
+        "https://www.googleapis.com/auth/gmail.readonly",
+        "https://*.openai.com/"
     ],
-    "background": {
-        "service_worker": "background.js"
-    },
     "content_scripts": [
         {
-            "matches": ["https://mail.google.com/*"],
-            "js": ["gmailVerify.js"]
+            "matches": ["https://mail.google.com/*", "http://gmail.com/*"],
+            "js": ["bot.js", "main.js"]
         }
     ]
 }
