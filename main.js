@@ -10,20 +10,22 @@ setInterval(async () => {
         if (newEmail !== fromAddress) {
             fromAddress = newEmail;
 
-            let bodyNodes = document.getElementsByClassName("gs");
-            if (bodyNodes && bodyNodes.length > 0) {
-                body = bodyNodes[0].getInnerHTML();
+            let bodyNodes = document.getElementsByClassName("gs")[0];
+            if (!bodyNodes) {
+                bodyNodes = document.getElementById(":p3");
             }
+            body = bodyNodes.innerText;
             let maxBodyLength = Math.min(body.length, 2000);
             body = body.substring(0, maxBodyLength);
             body = escapeHtml(body);
+            console.log(body);
 
             let content = `From: ${fromAddress}\nBody:\n${body}\n\n\n`;
 
             let response = await getIsPhishing(content);
             console.log(response);
             try {
-                if(parseInt(response) > 50) {
+                if(parseInt(response) > 70) {
                     // console.log("scam")
                     let div = document.createElement("div");
                     document.getElementsByClassName("nH V8djrc byY")[0].appendChild(div);
