@@ -13,7 +13,7 @@ model = AutoModelForSequenceClassification.from_pretrained(model_name)
 model.eval()
 
 # Set the threshold for phishing scam classification
-threshold = 0.5
+threshold = 0.6
 
 @app.route('/classify', methods=['POST'])
 def classify():
